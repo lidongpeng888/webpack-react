@@ -1,5 +1,7 @@
 import React , {Component} from 'react'
 import { Menu } from 'antd';
+import { NavLink } from 'react-router-dom'
+import './index.less'
 import menuList from '../../resource/menuConfig.js'
 const SubMenu = Menu.SubMenu;
 export default class App extends Component {
@@ -13,15 +15,25 @@ export default class App extends Component {
                                 { this.renderMenu(menu.children)}
                             </SubMenu>
                 }
-                return  <Menu.Item key={menu.key}>{menu.title}</Menu.Item>
+                return  <Menu.Item key={menu.key}>
+                            <NavLink to={menu.key}>{menu.title}</NavLink>
+                        </Menu.Item>
           })
     }
     render() {
-        console.log(this.renderMenu(this.state.menuList))
         return (
-            <Menu theme="dark" mode="inline">
+            <div className="navWrapper">
+                 <NavLink to="/home" >
+                 <div className="logo">
+                        <img src="/assets/logo-ant.svg" alt=""/>
+                        <h1>XXXX</h1>
+                    </div>
+                 </NavLink>
+                <Menu theme="dark" mode="inline" className="container">
                     { this.renderMenu(this.state.menuList)}
-            </Menu>
+                </Menu>
+            </div>
+            
         );
     }
 }
